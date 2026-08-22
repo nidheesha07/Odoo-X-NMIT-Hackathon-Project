@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}All Attendance - Dayflow{% endblock %}
+{% block content %}
+<h1>Attendance (All Employees)</h1>
+<table class="data-table">
+    <thead>
+        <tr><th>Employee</th><th>Date</th><th>Check In</th><th>Check Out</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.employee_name }}</td>
+            <td>{{ r.date }}</td>
+            <td>{{ r.check_in or "-" }}</td>
+            <td>{{ r.check_out or "-" }}</td>
+            <td>{{ r.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No attendance records yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
