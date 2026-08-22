@@ -60,56 +60,55 @@ h1 { margin-top: 0; }
 }
 .flash-box p { margin: 4px 0; }
 
-/* ---------- Auth cards ---------- */
+/* ---------- Modern Login / Auth Page ---------- */
 
-/* ---------- Attractive Login Page ---------- */
-
-.auth-card {
-    max-width: 430px;
-    margin: 70px auto;
-    background: rgba(255, 255, 255, 0.96);
-    padding: 38px;
-    border-radius: 22px;
-
-    /* Unique shadow */
-    box-shadow:
-        0 20px 50px rgba(38, 50, 90, 0.18),
-        0 4px 12px rgba(38, 50, 90, 0.08);
-
-    border: 1px solid rgba(255, 255, 255, 0.8);
-
-    /* Smooth animation */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+body {
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
 }
 
-.auth-card:hover {
-    transform: translateY(-4px);
+/* Dark background only for authentication pages */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at top left, #26345f 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #30234f 0%, transparent 35%),
+        #111827;
+    padding: 30px 16px;
+}
+
+/* Login card */
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+
+    background: rgba(43, 53, 76, 0.96);
+    padding: 38px 34px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
     box-shadow:
-        0 25px 60px rgba(38, 50, 90, 0.22),
-        0 6px 15px rgba(38, 50, 90, 0.10);
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 30px rgba(91, 110, 225, 0.08);
 }
 
 /* Login heading */
 .auth-card h1 {
+    color: #ffffff;
     text-align: center;
     margin-bottom: 8px;
-
-    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-
-    /* Unique purple-blue color */
-    color: #5146c7;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 /* Optional subtitle */
 .auth-card p {
-    text-align: center;
-    color: #73758a;
-    font-size: 14px;
-    margin-bottom: 22px;
-
-    font-family: "Segoe UI", sans-serif;
+    color: #b9c1d4;
 }
 
 /* Form */
@@ -123,85 +122,89 @@ h1 { margin-top: 0; }
 .auth-card label {
     margin-top: 14px;
     margin-bottom: 5px;
-
-    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    color: #e5e9f2;
+    font-weight: 600;
     font-size: 14px;
-    font-weight: 700;
-    color: #35345a;
 }
 
 /* Input fields */
 .auth-card input,
 .auth-card select {
-    width: 100%;
-    padding: 13px 15px;
+    background: #38445f;
+    color: #ffffff;
 
-    border: 2px solid #e2e1f2;
-    border-radius: 10px;
+    border: 1px solid #53617d;
+    border-radius: 9px;
 
-    background: #fafaff;
-    color: #292847;
-
-    font-family: "Segoe UI", sans-serif;
-    font-size: 15px;
+    padding: 12px 14px;
 
     outline: none;
-    transition: all 0.25s ease;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-/* Input hover */
-.auth-card input:hover,
-.auth-card select:hover {
-    border-color: #a9a2ed;
+/* Placeholder */
+.auth-card input::placeholder {
+    color: #9da8bd;
 }
 
 /* Input focus */
 .auth-card input:focus,
 .auth-card select:focus {
-    border-color: #6357d9;
-    background: #ffffff;
+    background: #3d4966;
+    border-color: #7c8cff;
 
-    box-shadow: 0 0 0 4px rgba(99, 87, 217, 0.12);
+    box-shadow:
+        0 0 0 3px rgba(124, 140, 255, 0.15);
 }
 
 /* Login button */
 .auth-card .btn-primary {
     margin-top: 24px;
-    padding: 13px 20px;
+
+    width: 100%;
+    padding: 12px 18px;
 
     border: none;
-    border-radius: 10px;
+    border-radius: 9px;
 
     background: linear-gradient(
         135deg,
-        #6357d9,
-        #8b5cf6
+        #6675e8,
+        #7956d8
     );
 
     color: #ffffff;
 
-    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    box-shadow: 0 8px 18px rgba(99, 87, 217, 0.25);
+    box-shadow:
+        0 8px 20px rgba(102, 117, 232, 0.25);
 
-    transition: all 0.25s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
 }
 
 /* Button hover */
 .auth-card .btn-primary:hover {
     background: linear-gradient(
         135deg,
-        #5146c7,
-        #7c3aed
+        #7584f2,
+        #8967e5
     );
 
     transform: translateY(-2px);
 
-    box-shadow: 0 12px 25px rgba(99, 87, 217, 0.32);
+    box-shadow:
+        0 12px 25px rgba(102, 117, 232, 0.35);
 }
 
 /* Button click */
@@ -211,52 +214,13 @@ h1 { margin-top: 0; }
 
 /* Links inside login card */
 .auth-card a {
-    color: #6357d9;
-    font-weight: 600;
-    text-decoration: none;
-
-    transition: color 0.2s ease;
+    color: #9ca8ff;
+    font-weight: 500;
 }
 
 .auth-card a:hover {
-    color: #7c3aed;
-    text-decoration: underline;
-}
-
-/* ---------- Login Page Background ---------- */
-
-body:has(.auth-card) {
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(139, 92, 246, 0.18),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(99, 87, 217, 0.18),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #f5f3ff,
-            #eef2ff,
-            #f8f7ff
-        );
-
-    font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
-}
-
-/* Mobile */
-@media (max-width: 500px) {
-    .auth-card {
-        margin: 35px 16px;
-        padding: 28px 22px;
-    }
-
-    .auth-card h1 {
-        font-size: 28px;
-    }
+    color: #c0c7ff;
+    text-decoration: none;
 }
 
 /* ---------- Form controls ---------- */
