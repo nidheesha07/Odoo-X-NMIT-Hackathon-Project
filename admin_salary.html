@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Edit Salary - Dayflow{% endblock %}
+{% block content %}
+<h1>Salary Info: {{ employee.name }}</h1>
+<p><a href="{{ url_for('admin_employees') }}">&larr; Back to Employees</a></p>
+
+<form method="POST" action="{{ url_for('admin_employee_salary', emp_id=employee.id) }}" class="grid-form">
+    <div>
+        <label for="monthly_wage">Monthly Wage (Rs.)</label>
+        <input type="number" step="0.01" min="0" id="monthly_wage" name="monthly_wage" value="{{ salary_row.monthly_wage }}" required>
+    </div>
+    <div>
+        <label for="pf_rate">PF Rate (%)</label>
+        <input type="number" step="0.01" min="0" id="pf_rate" name="pf_rate" value="{{ salary_row.pf_rate }}" required>
+    </div>
+    <div>
+        <label for="professional_tax">Professional Tax (Rs./month)</label>
+        <input type="number" step="0.01" min="0" id="professional_tax" name="professional_tax" value="{{ salary_row.professional_tax }}" required>
+    </div>
+    <div class="full-width">
+        <button type="submit" class="btn-primary">Save Salary</button>
+    </div>
+</form>
+
+<h2>Preview (auto-calculated)</h2>
+<table class="salary-table">
+    <tr><td>Basic Salary</td><td>Rs. {{ salary.basic }}</td></tr>
+    <tr><td>House Rent Allowance</td><td>Rs. {{ salary.hra }}</td></tr>
+    <tr><td>Standard Allowance</td><td>Rs. {{ salary.standard_allowance }}</td></tr>
+    <tr><td>Performance Bonus</td><td>Rs. {{ salary.performance_bonus }}</td></tr>
+    <tr><td>Leave Travel Allowance</td><td>Rs. {{ salary.leave_travel_allowance }}</td></tr>
+    <tr><td>Fixed Allowance</td><td>Rs. {{ salary.fixed_allowance }}</td></tr>
+    <tr><td>PF Employee Contribution</td><td>Rs. {{ salary.pf_employee }}</td></tr>
+    <tr><td>PF Employer Contribution</td><td>Rs. {{ salary.pf_employer }}</td></tr>
+    <tr><td>Professional Tax</td><td>Rs. {{ salary.professional_tax }}</td></tr>
+    <tr><td><strong>Net Pay</strong></td><td><strong>Rs. {{ salary.net_pay }}</strong></td></tr>
+</table>
+{% endblock %}
