@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Attendance - Dayflow{% endblock %}
+{% block content %}
+<h1>My Attendance</h1>
+
+<div class="checkin-box">
+    <form method="POST" action="{{ url_for('attendance') }}">
+        <input type="hidden" name="action" value="check_in">
+        <button type="submit" class="btn-primary" {% if today_row and today_row.check_in %}disabled{% endif %}>Check In</button>
+    </form>
+    <form method="POST" action="{{ url_for('attendance') }}">
+        <input type="hidden" name="action" value="check_out">
+        <button type="submit" class="btn-secondary" {% if not today_row or today_row.check_out %}disabled{% endif %}>Check Out</button>
+    </form>
+</div>
+
+<h2>Last 30 Days</h2>
+<table class="data-table">
+    <thead>
+        <tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.date }}</td>
+            <td>{{ r.check_in or "-" }}</td>
+            <td>{{ r.check_out or "-" }}</td>
+            <td>{{ r.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No attendance records yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
