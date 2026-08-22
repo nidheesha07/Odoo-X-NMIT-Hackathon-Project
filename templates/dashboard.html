@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Dayflow{% endblock %}
+{% block content %}
+<h1>Welcome, {{ user.name }}</h1>
+
+{% if session.role == 'admin' %}
+<div class="card-grid">
+    <div class="stat-card">
+        <h2>{{ employee_count }}</h2>
+        <p>Total Employees</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ pending_leaves }}</h2>
+        <p>Pending Leave Requests</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ today_attendance }}</h2>
+        <p>Checked In Today</p>
+    </div>
+</div>
+<div class="quick-links">
+    <a href="{{ url_for('admin_employees') }}" class="btn-secondary">View Employees</a>
+    <a href="{{ url_for('admin_leave') }}" class="btn-secondary">Review Leave Requests</a>
+    <a href="{{ url_for('admin_attendance') }}" class="btn-secondary">View Attendance</a>
+</div>
+
+{% else %}
+<div class="card-grid">
+    <div class="stat-card">
+        <h2>{% if today_row and today_row.check_in %}{{ today_row.check_in }}{% else %}--:--{% endif %}</h2>
+        <p>Checked In</p>
+    </div>
+    <div class="stat-card">
+        <h2>{% if today_row and today_row.check_out %}{{ today_row.check_out }}{% else %}--:--{% endif %}</h2>
+        <p>Checked Out</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ my_pending_leaves }}</h2>
+        <p>Pending Leave Requests</p>
+    </div>
+</div>
+<div class="quick-links">
+    <a href="{{ url_for('profile') }}" class="btn-secondary">My Profile</a>
+    <a href="{{ url_for('attendance') }}" class="btn-secondary">Attendance</a>
+    <a href="{{ url_for('leave') }}" class="btn-secondary">Apply for Leave</a>
+</div>
+{% endif %}
+{% endblock %}
