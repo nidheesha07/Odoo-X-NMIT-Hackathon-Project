@@ -570,3 +570,22 @@ input:focus, select:focus {
     h1 { font-size: 26px; }
     .salary-summary { gap: 22px; }
 }
+
+
+.forgot-password {
+    text-align: right;
+    margin: 8px 0 18px;
+}
+
+.forgot-password a {
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.forgot-password a:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+}

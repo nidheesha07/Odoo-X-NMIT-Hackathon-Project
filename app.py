@@ -131,7 +131,67 @@ def login():
     return render_template("login.html")
 
 
+# ---------------------------------------------------------------------------
+# Forgot Password
+# ---------------------------------------------------------------------------
 
+@app.route("/forgot-password", methods=["GET", "POST"])
+def forgot_password():
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+
+        conn = db.get_db()
+        user = conn.execute(
+            "SELECT * FROM users WHERE email = ?", (email,)
+        ).fetchone()
+
+        if user is None:
+            flash("No account found with that email address.")
+            return render_template("forgot_password.html")
+
+        return render_template(
+            "reset_password.html",
+            email=email
+        )
+
+    return render_template("forgot_password.html")
+
+
+@app.route("/reset-password", methods=["POST"])
+def reset_password():
+    email = request.form.get("email", "").strip().lower()
+    new_password = request.form.get("password", "")
+    confirm_password = request.form.get("confirm_password", "")
+
+    if len(new_password) < 6:
+        flash("Password must be at least 6 characters long.")
+        return render_template("reset_password.html", email=email)
+
+    if new_password != confirm_password:
+        flash("Passwords do not match.")
+        return render_template("reset_password.html", email=email)
+
+    conn = db.get_db()
+
+    user = conn.execute(
+        "SELECT * FROM users WHERE email = ?", (email,)
+    ).fetchone()
+
+    if user is None:
+        flash("No account found with that email address.")
+        return redirect(url_for("forgot_password"))
+
+    new_password_hash = generate_password_hash(new_password)
+
+    conn.execute(
+        "UPDATE users SET password_hash = ? WHERE email = ?",
+        (new_password_hash, email)
+    )
+
+    conn.commit()
+
+    flash("Password changed successfully. Please log in.")
+    return redirect(url_for("login"))
 
 @app.route("/logout")
 def logout():
