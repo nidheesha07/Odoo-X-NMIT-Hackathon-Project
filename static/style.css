@@ -54,6 +54,74 @@
     --transition: 0.22s ease;
 }
 
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+[data-theme="dark"] {
+    /* Core palette */
+    --primary: #9aa5ff;
+    --primary-dark: #aab3ff;
+    --secondary: #79dfd1;
+    --accent: #ffb39b;
+
+    /* Surfaces & background */
+    --background: #11131a;
+    --surface: #1b1e27;
+    --surface-soft: #222633;
+    --border-soft: rgba(154, 165, 255, 0.18);
+
+    /* Text */
+    --text: #f1f3f8;
+    --muted-text: #a7adbf;
+    --text-on-primary: #ffffff;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+        135deg,
+        #9aa5ff 0%,
+        #7c8cff 55%,
+        #6fd6c8 100%
+    );
+
+    --gradient-secondary: linear-gradient(
+        135deg,
+        #29304a 0%,
+        #203b38 100%
+    );
+
+    --gradient-peach-lavender: linear-gradient(
+        135deg,
+        #4a3530 0%,
+        #302a4a 100%
+    );
+
+    --gradient-page:
+        radial-gradient(circle at 10% 0%, #252b46 0%, transparent 45%),
+        radial-gradient(circle at 90% 10%, #193b37 0%, transparent 40%),
+        radial-gradient(circle at 50% 100%, #3d2c28 0%, transparent 45%),
+        #11131a;
+
+    --gradient-white-lavender: linear-gradient(
+        180deg,
+        #1f222d 0%,
+        #27243a 100%
+    );
+
+    /* Status colours */
+    --success: #72d99a;
+    --success-bg: #193b29;
+    --warning: #ffd66b;
+    --warning-bg: #403719;
+    --danger: #ff8d8d;
+    --danger-bg: #452222;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.20);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.28);
+    --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.38);
+}
+
 /* ---------- Basic reset & theme ---------- */
 
 * { box-sizing: border-box; }
@@ -151,6 +219,29 @@ h1 {
     box-shadow: 0 10px 22px rgba(247, 184, 160, 0.45);
 }
 
+/* ---------- Dark / Light Mode Toggle ---------- */
+
+.theme-toggle {
+    border: 1px solid var(--border-soft);
+    background: var(--surface);
+    color: var(--text);
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.theme-toggle:hover {
+    background: var(--surface-soft);
+    transform: translateY(-1px);
+}
+
 /* ---------- Flash messages ---------- */
 .flash-box {
     background: var(--gradient-peach-lavender);
@@ -185,7 +276,7 @@ h1 {
     max-width: 430px;
     margin: 0 auto;
 
-    background: rgba(255, 255, 255, 0.82);
+    background: var(--surface);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     padding: 40px 36px;
@@ -235,7 +326,7 @@ h1 {
 /* Input fields */
 .auth-card input,
 .auth-card select {
-    background: #f7f8fd;
+    background: var(--surface-soft);
     color: var(--text);
 
     border: 1px solid #e2e5f5;
@@ -259,7 +350,7 @@ h1 {
 /* Input focus */
 .auth-card input:focus,
 .auth-card select:focus {
-    background: #ffffff;
+    background: var(--surface);
     border-color: var(--primary);
 
     box-shadow:
@@ -327,10 +418,10 @@ input, select, button {
 }
 input, select {
     padding: 11px 12px;
-    border: 1px solid #e2e5f5;
+    border: 1px solid var(--border-soft;
     border-radius: var(--radius-sm);
     width: 100%;
-    background: #fbfbfe;
+    background: var(--surface-soft);
     color: var(--text);
     transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
 }

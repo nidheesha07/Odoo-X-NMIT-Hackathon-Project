@@ -23,6 +23,11 @@
         </div>
         <div class="navbar-user">
             <span>{{ session.name }} ({{ session.role }})</span>
+
+            <button id="theme-toggle" class="theme-toggle" type="button">
+                🌙 Dark
+            </button>
+
             <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
         </div>
     </nav>
