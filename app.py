@@ -277,6 +277,82 @@ def profile():
 
     return render_template("profile.html", user=user, tab="private")
 
+RESUME_FIELDS = ["about", "job_love", "hobbies"]
+
+
+@app.route("/profile/resume", methods=["GET", "POST"])
+@login_required
+def profile_resume():
+    conn = db.get_db()
+    user = get_user_by_id(session["user_id"])
+
+    if request.method == "POST":
+        values = {field: request.form.get(field, "").strip() for field in RESUME_FIELDS}
+        conn.execute(
+            "UPDATE users SET about = ?, job_love = ?, hobbies = ? WHERE id = ?",
+            (values["about"], values["job_love"], values["hobbies"], user["id"]),
+        )
+        conn.commit()
+        flash("Resume updated.")
+        return redirect(url_for("profile_resume"))
+
+    skills = conn.execute(
+        "SELECT * FROM skills WHERE user_id = ? ORDER BY id", (user["id"],)
+    ).fetchall()
+    certifications = conn.execute(
+        "SELECT * FROM certifications WHERE user_id = ? ORDER BY id", (user["id"],)
+    ).fetchall()
+    return render_template(
+        "profile.html", user=user, tab="resume", skills=skills, certifications=certifications
+    )
+
+
+@app.route("/profile/resume/skills/add", methods=["POST"])
+@login_required
+def add_skill():
+    skill_name = request.form.get("skill_name", "").strip()
+    if skill_name:
+        db.get_db().execute(
+            "INSERT INTO skills (user_id, skill_name) VALUES (?, ?)",
+            (session["user_id"], skill_name),
+        )
+        db.get_db().commit()
+    return redirect(url_for("profile_resume"))
+
+
+@app.route("/profile/resume/skills/<int:skill_id>/delete", methods=["POST"])
+@login_required
+def delete_skill(skill_id):
+    # only delete if it belongs to the logged-in user
+    db.get_db().execute(
+        "DELETE FROM skills WHERE id = ? AND user_id = ?", (skill_id, session["user_id"])
+    )
+    db.get_db().commit()
+    return redirect(url_for("profile_resume"))
+
+
+@app.route("/profile/resume/certifications/add", methods=["POST"])
+@login_required
+def add_certification():
+    certification_name = request.form.get("certification_name", "").strip()
+    if certification_name:
+        db.get_db().execute(
+            "INSERT INTO certifications (user_id, certification_name) VALUES (?, ?)",
+            (session["user_id"], certification_name),
+        )
+        db.get_db().commit()
+    return redirect(url_for("profile_resume"))
+
+
+@app.route("/profile/resume/certifications/<int:cert_id>/delete", methods=["POST"])
+@login_required
+def delete_certification(cert_id):
+    db.get_db().execute(
+        "DELETE FROM certifications WHERE id = ? AND user_id = ?", (cert_id, session["user_id"])
+    )
+    db.get_db().commit()
+    return redirect(url_for("profile_resume"))
+
 
 @app.route("/profile/salary")
 @login_required
