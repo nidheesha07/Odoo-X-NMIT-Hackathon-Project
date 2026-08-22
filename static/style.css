@@ -61,16 +61,203 @@ h1 { margin-top: 0; }
 .flash-box p { margin: 4px 0; }
 
 /* ---------- Auth cards ---------- */
+
+/* ---------- Attractive Login Page ---------- */
+
 .auth-card {
-    max-width: 420px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 32px;
-    border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    max-width: 430px;
+    margin: 70px auto;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 38px;
+    border-radius: 22px;
+
+    /* Unique shadow */
+    box-shadow:
+        0 20px 50px rgba(38, 50, 90, 0.18),
+        0 4px 12px rgba(38, 50, 90, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    /* Smooth animation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.auth-card form { display: flex; flex-direction: column; gap: 4px; }
-.auth-card label { margin-top: 12px; font-weight: 600; font-size: 14px; }
+
+.auth-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 25px 60px rgba(38, 50, 90, 0.22),
+        0 6px 15px rgba(38, 50, 90, 0.10);
+}
+
+/* Login heading */
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+
+    /* Unique purple-blue color */
+    color: #5146c7;
+}
+
+/* Optional subtitle */
+.auth-card p {
+    text-align: center;
+    color: #73758a;
+    font-size: 14px;
+    margin-bottom: 22px;
+
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Form */
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Labels */
+.auth-card label {
+    margin-top: 14px;
+    margin-bottom: 5px;
+
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #35345a;
+}
+
+/* Input fields */
+.auth-card input,
+.auth-card select {
+    width: 100%;
+    padding: 13px 15px;
+
+    border: 2px solid #e2e1f2;
+    border-radius: 10px;
+
+    background: #fafaff;
+    color: #292847;
+
+    font-family: "Segoe UI", sans-serif;
+    font-size: 15px;
+
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+/* Input hover */
+.auth-card input:hover,
+.auth-card select:hover {
+    border-color: #a9a2ed;
+}
+
+/* Input focus */
+.auth-card input:focus,
+.auth-card select:focus {
+    border-color: #6357d9;
+    background: #ffffff;
+
+    box-shadow: 0 0 0 4px rgba(99, 87, 217, 0.12);
+}
+
+/* Login button */
+.auth-card .btn-primary {
+    margin-top: 24px;
+    padding: 13px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #6357d9,
+        #8b5cf6
+    );
+
+    color: #ffffff;
+
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 18px rgba(99, 87, 217, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+/* Button hover */
+.auth-card .btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        #5146c7,
+        #7c3aed
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 25px rgba(99, 87, 217, 0.32);
+}
+
+/* Button click */
+.auth-card .btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Links inside login card */
+.auth-card a {
+    color: #6357d9;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.auth-card a:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+}
+
+/* ---------- Login Page Background ---------- */
+
+body:has(.auth-card) {
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(139, 92, 246, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(99, 87, 217, 0.18),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f5f3ff,
+            #eef2ff,
+            #f8f7ff
+        );
+
+    font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .auth-card {
+        margin: 35px 16px;
+        padding: 28px 22px;
+    }
+
+    .auth-card h1 {
+        font-size: 28px;
+    }
+}
 
 /* ---------- Form controls ---------- */
 input, select, button {
