@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Leave Approvals - Dayflow{% endblock %}
+{% block content %}
+<h1>Leave Approvals</h1>
+<table class="data-table">
+    <thead>
+        <tr><th>Employee</th><th>Type</th><th>From</th><th>To</th><th>Remarks</th><th>Status</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+        {% for r in requests %}
+        <tr>
+            <td>{{ r.employee_name }}</td>
+            <td>{{ r.leave_type }}</td>
+            <td>{{ r.start_date }}</td>
+            <td>{{ r.end_date }}</td>
+            <td>{{ r.remarks or "-" }}</td>
+            <td><span class="status-badge status-{{ r.status|lower }}">{{ r.status }}</span></td>
+            <td>
+                {% if r.status == 'Pending' %}
+                <form method="POST" action="{{ url_for('admin_leave') }}" class="inline-form">
+                    <input type="hidden" name="leave_id" value="{{ r.id }}">
+                    <input type="text" name="admin_comment" placeholder="Comment (optional)">
+                    <button type="submit" name="decision" value="Approved" class="btn-primary">Approve</button>
+                    <button type="submit" name="decision" value="Rejected" class="btn-danger">Reject</button>
+                </form>
+                {% else %}
+                {{ r.admin_comment or "-" }}
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">No leave requests yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
