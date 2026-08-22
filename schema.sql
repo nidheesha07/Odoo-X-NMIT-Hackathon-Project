@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS salary;
 DROP TABLE IF EXISTS attendance;
 DROP TABLE IF EXISTS leave_requests;
+DROP TABLE IF EXISTS skills;
+DROP TABLE IF EXISTS certifications;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,7 +29,24 @@ CREATE TABLE users (
     bank_name TEXT DEFAULT '',
     ifsc_code TEXT DEFAULT '',
     pan_no TEXT DEFAULT '',
-    uan_no TEXT DEFAULT ''
+    uan_no TEXT DEFAULT '',
+    about TEXT DEFAULT '',
+    job_love TEXT DEFAULT '',
+    hobbies TEXT DEFAULT ''
+);
+
+CREATE TABLE skills (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    skill_name TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+CREATE TABLE certifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    certification_name TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE salary (

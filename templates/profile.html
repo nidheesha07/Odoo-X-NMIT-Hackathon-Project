@@ -17,9 +17,69 @@
 </div>
 
 <div class="tabs">
+    <a href="{{ url_for('profile_resume') }}" class="tab {% if tab == 'resume' %}tab-active{% endif %}">Resume</a>
     <a href="{{ url_for('profile') }}" class="tab {% if tab == 'private' %}tab-active{% endif %}">Private Info</a>
     <a href="{{ url_for('profile_salary') }}" class="tab {% if tab == 'salary' %}tab-active{% endif %}">Salary Info</a>
 </div>
+
+{% if tab == 'resume' %}
+<div class="resume-view">
+    <form method="POST" action="{{ url_for('profile_resume') }}" class="resume-form">
+        <label for="about">About</label>
+        <textarea id="about" name="about" rows="4">{{ user.about }}</textarea>
+
+        <label for="job_love">What I love about my job</label>
+        <textarea id="job_love" name="job_love" rows="4">{{ user.job_love }}</textarea>
+
+        <label for="hobbies">My interests and hobbies</label>
+        <textarea id="hobbies" name="hobbies" rows="4">{{ user.hobbies }}</textarea>
+
+        <button type="submit" class="btn-primary">Save Resume</button>
+    </form>
+
+    <div class="resume-side">
+        <div class="resume-box">
+            <h3>Skills</h3>
+            <ul class="chip-list">
+                {% for s in skills %}
+                <li class="chip">
+                    {{ s.skill_name }}
+                    <form method="POST" action="{{ url_for('delete_skill', skill_id=s.id) }}" class="chip-delete-form">
+                        <button type="submit" class="chip-delete" title="Remove">&times;</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="chip-empty">No skills added yet.</li>
+                {% endfor %}
+            </ul>
+            <form method="POST" action="{{ url_for('add_skill') }}" class="add-chip-form">
+                <input type="text" name="skill_name" placeholder="Add a skill" required>
+                <button type="submit" class="btn-secondary">+ Add Skill</button>
+            </form>
+        </div>
+
+        <div class="resume-box">
+            <h3>Certification</h3>
+            <ul class="chip-list">
+                {% for c in certifications %}
+                <li class="chip">
+                    {{ c.certification_name }}
+                    <form method="POST" action="{{ url_for('delete_certification', cert_id=c.id) }}" class="chip-delete-form">
+                        <button type="submit" class="chip-delete" title="Remove">&times;</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="chip-empty">No certifications added yet.</li>
+                {% endfor %}
+            </ul>
+            <form method="POST" action="{{ url_for('add_certification') }}" class="add-chip-form">
+                <input type="text" name="certification_name" placeholder="Add a certification" required>
+                <button type="submit" class="btn-secondary">+ Add Certification</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 {% if tab == 'private' %}
 <form method="POST" action="{{ url_for('profile') }}" class="grid-form">

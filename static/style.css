@@ -493,6 +493,65 @@ input:focus, select:focus {
     box-shadow: 0 -3px 0 var(--primary) inset;
 }
 
+/* ---------- Resume tab ---------- */
+.resume-view {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 800px) {
+    .resume-view { grid-template-columns: 1fr; }
+}
+
+.resume-form {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.resume-form label { font-weight: 600; font-size: 14px; margin-top: 14px; }
+.resume-form textarea {
+    padding: 10px;
+    border: 1px solid #d3d7e0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+}
+
+.resume-side { display: flex; flex-direction: column; gap: 20px; }
+.resume-box { background: #fff; padding: 20px; border-radius: 12px; }
+.resume-box h3 { margin-top: 0; }
+
+.chip-list { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+    background: #e7e9f2;
+    border-radius: 20px;
+    padding: 6px 8px 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+.chip-empty { color: #888; font-size: 14px; }
+.chip-delete-form { display: inline; }
+.chip-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 4px;
+}
+.chip-delete:hover { color: #ea4335; }
+
+.add-chip-form { display: flex; gap: 8px; }
+.add-chip-form input { flex: 1; }
+.add-chip-form button { white-space: nowrap; }
+
 /* ---------- Salary view ---------- */
 .salary-view {
     background: var(--surface);
