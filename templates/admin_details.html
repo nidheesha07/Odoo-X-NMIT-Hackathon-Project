@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Job Details - Dayflow{% endblock %}
+{% block content %}
+<h1>Job Details: {{ employee.name }}</h1>
+<p><a href="{{ url_for('admin_employees') }}">&larr; Back to Employees</a></p>
+
+<form method="POST" action="{{ url_for('admin_employee_details', emp_id=employee.id) }}" class="grid-form">
+    <div>
+        <label for="designation">Job Title</label>
+        <input type="text" id="designation" name="designation" value="{{ employee.designation }}" placeholder="e.g. HR Executive">
+    </div>
+    <div>
+        <label for="department">Department</label>
+        <input type="text" id="department" name="department" value="{{ employee.department }}" placeholder="e.g. Human Resources">
+    </div>
+    <div>
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" value="{{ employee.company }}">
+    </div>
+    <div>
+        <label for="manager">Manager</label>
+        <input type="text" id="manager" name="manager" value="{{ employee.manager }}" placeholder="e.g. Alice Admin">
+    </div>
+    <div>
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" value="{{ employee.location }}" placeholder="e.g. Bengaluru">
+    </div>
+    <div class="full-width">
+        <button type="submit" class="btn-primary">Save Job Details</button>
+    </div>
+</form>
+{% endblock %}
