@@ -374,6 +374,7 @@ input:focus, select:focus {
     background: #eef0fb;
     color: var(--text);
     border: 1px solid var(--border-soft);
+    margin-top: 20px;
 }
 .btn-secondary:hover { background: #e3e6f9; transform: translateY(-1px); }
 .btn-secondary:disabled { background: #f4f5fa; color: #aeb2c9; cursor: not-allowed; transform: none; }
